@@ -6,6 +6,10 @@ import pool from './config/db.js';
 
 async function seedDatabase() {
   try {
+    // Clear out existing data and reset sequences
+    await pool.query('TRUNCATE TABLE answers, questions, categories RESTART IDENTITY CASCADE');
+    console.log('Cleared existing data.');
+
     // Load index.json to get a list of categories
     const indexPath = path.join('data', 'index.json');
     const indexData = await readJson(indexPath);
