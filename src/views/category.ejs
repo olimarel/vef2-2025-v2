@@ -4,18 +4,24 @@
     <meta charset="utf-8">
     <title><%= category.name %></title>
     <link rel="stylesheet" href="/styles.css">
+    <script defer src="/quiz.js"></script>
   </head>
   <body>
     <h1><%= category.name %></h1>
-    <% if (category.questions && category.questions.length > 0) { %>
-      <ul>
-        <% category.questions.forEach(question => { %>
-          <li><%= question.question_text %></li>
-        <% }) %>
-      </ul>
-    <% } else { %>
-      <p>No questions found.</p>
-    <% } %>
-    <a href="/questions/<%= category.id %>/add">Add a question</a>
+    <% category.questions.forEach(question => { %>
+      <section class="question">
+        <p><%= question.question_text %></p>
+        <ul>
+          <% question.answers.forEach(answer => { %>
+            <li>
+              <button data-correct="<%= answer.correct %>">
+                <%= answer.answer_text %>
+              </button>
+            </li>
+          <% }) %>
+        </ul>
+        <div class="feedback"></div>
+      </section>
+    <% }) %>
   </body>
 </html>
