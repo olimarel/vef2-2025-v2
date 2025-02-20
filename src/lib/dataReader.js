@@ -1,10 +1,11 @@
+// src/lib/dataReader.js
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
 /**
- * les JSON skrá og skilar gögnum eða villu
- * @param {string} filePath - path í JSON file
- * @returns {Promise<unknown|null>}
+ * Reads a JSON file and returns its contents, or null on error.
+ * @param {string} filePath - Path to the JSON file.
+ * @returns {Promise<any|null>}
  */
 export async function readJson(filePath) {
   console.log('Reading file:', filePath);
@@ -12,7 +13,7 @@ export async function readJson(filePath) {
   try {
     data = await fs.readFile(path.resolve(filePath), 'utf-8');
   } catch (error) {
-    console.error(`Error during reading ${filePath}:`, error.message);
+    console.error(`Error reading ${filePath}:`, error.message);
     return null;
   }
   try {

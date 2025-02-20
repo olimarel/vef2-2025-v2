@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add Question</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <h1>Add Question to <%= category.name || 'Category' %></h1>
+    <% if (errors) { %>
+      <ul>
+        <% errors.forEach(error => { %>
+          <li><%= error.msg %></li>
+        <% }) %>
+      </ul>
+    <% } %>
+    <form action="/questions/<%= category.id %>/add" method="POST">
+      <label for="question">Question:</label>
+      <textarea name="question" id="question" required><%= oldInput.question || '' %></textarea>
+      
+      <!-- Example answer fields (you might implement dynamic fields with JS) -->
+      <div>
+        <label for="answer1">Answer 1:</label>
+        <input type="text" name="answers[0][answer]" id="answer1" required>
+        <label>
+          Correct:
+          <input type="radio" name="correctAnswer" value="0" required>
+        </label>
+      </div>
+      
+      <div>
+        <label for="answer2">Answer 2:</label>
+        <input type="text" name="answers[1][answer]" id="answer2" required>
+        <label>
+          Correct:
+          <input type="radio" name="correctAnswer" value="1">
+        </label>
+      </div>
+      <!-- Additional answer fields can be added as needed -->
+      
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
